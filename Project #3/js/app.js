@@ -1,14 +1,13 @@
 
 
-
-var Enemy = function(x,y,speed) {
+var enemy = function(x,y,speed) {
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
     this.speed = speed;
 };
 
-Enemy.prototype.update = function(dt) {
+enemy.prototype.update = function(dt) {
   if (this.x > 400) {
     this.speed = -1;
 } 
@@ -18,22 +17,21 @@ Enemy.prototype.update = function(dt) {
 this.x = this.x + this.speed;
 };
 
-Enemy.prototype.render = function() {
+enemy.prototype.render = function() {
     
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
 };
 
-var Player = function() {
+var player = function() {
     this.sprite = 'images/char-princess-girl.png';
     this.x = 0;
     this.y = 0;
 };
 
-Player.prototype.update = function() {
+player.prototype.update = function() {
 };
-
-Player.prototype.render = function(){
+player.prototype.render = function(){
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
@@ -42,7 +40,7 @@ reset = function() {
     this.y = 0;
 };
 
-Player.prototype.handleInput = function(keyCode) {
+player.prototype.handleInput = function(keyCode) {
     if (keyCode === 'down') {
         this.y = this.y + 25;
     }
@@ -71,24 +69,29 @@ Player.prototype.handleInput = function(keyCode) {
 };
 
 var allEnemies = [
-new Enemy(0,75),
-new Enemy(-200,150),
-new Enemy(-300,225)
+new enemy(0,75),
+new enemy(-200,150),
+new enemy(-300,225)
 ];
-var player = new Player();
+var player = new player();
 
 
-var Enemy = {width: 40, height: 20};
-var Player = {width: 20, height: 30};
+var enemySize = {width: 40, height: 20};
+var playerSize = {width: 20, height: 30};
 
-if (Enemy.x < Player.x + Player.width &&
-   Enemy.x + Enemy.width > Player.x &&
-   Enemy.y < Player.y + Player.height &&
-   Enemy.height + Enemy.y > Player.y) {
+function checkCollisions() {
+
+    if (enemy.x < player.x + playerSize.width &&
+     enemy.x + enemySize.width > player.x &&
+     enemy.y < player.y + playerSize.height &&
+     enemySize.height + enemy.y > player.y) {
         this.y = 0;
         this.x = 0;
-}
+    };
 
+};
+
+checkCollisions();
 
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
@@ -99,4 +102,7 @@ document.addEventListener('keyup', function(e) {
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
+
+    console.log("enemy x coordinate:", enemy.x);
+    console.log("player x coordinate:", player.x);
 });
