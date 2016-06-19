@@ -1,13 +1,13 @@
 
 
-var enemy = function(x,y,speed) {
+var Enemy = function(x,y,speed) {
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
     this.speed = speed;
 };
 
-enemy.prototype.update = function(dt) {
+Enemy.prototype.update = function(dt) {
   if (this.x > 400) {
     this.speed = -1;
 } 
@@ -17,21 +17,21 @@ enemy.prototype.update = function(dt) {
 this.x = this.x + this.speed;
 };
 
-enemy.prototype.render = function() {
+Enemy.prototype.render = function() {
     
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
 };
 
-var player = function() {
+var Player = function() {
     this.sprite = 'images/char-princess-girl.png';
     this.x = 0;
     this.y = 0;
 };
 
-player.prototype.update = function() {
+Player.prototype.update = function() {
 };
-player.prototype.render = function(){
+Player.prototype.render = function(){
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
@@ -40,7 +40,7 @@ reset = function() {
     this.y = 0;
 };
 
-player.prototype.handleInput = function(keyCode) {
+Player.prototype.handleInput = function(keyCode) {
     if (keyCode === 'down') {
         this.y = this.y + 25;
     }
@@ -68,12 +68,14 @@ player.prototype.handleInput = function(keyCode) {
     }
 };
 
+var enemy = new Enemy(0,75);
+
 var allEnemies = [
 new enemy(0,75),
 new enemy(-200,150),
 new enemy(-300,225)
 ];
-var player = new player();
+var player = new Player();
 
 
 var enemySize = {width: 40, height: 20};
@@ -87,9 +89,8 @@ function checkCollisions() {
      enemySize.height + enemy.y > player.y) {
         this.y = 0;
         this.x = 0;
-    };
-
-};
+    }
+}
 
 checkCollisions();
 
@@ -105,4 +106,12 @@ document.addEventListener('keyup', function(e) {
 
     console.log("enemy x coordinate:", enemy.x);
     console.log("player x coordinate:", player.x);
+    console.log("allEnemies: ", allEnemies);
+
+    console.log("allEnemies first item: ", allEnemies[0]);
+
+    allEnemies.forEach(function(enemy) {
+        console.log("enemy: ", enemy);
+    });
+
 });
