@@ -35,7 +35,7 @@ Player.prototype.render = function(){
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-reset = function() {
+var reset = function() {
     this.x = 0;
     this.y = 0;
 };
@@ -71,9 +71,9 @@ Player.prototype.handleInput = function(keyCode) {
 var enemy = new Enemy(0,75);
 
 var allEnemies = [
-new enemy(0,75),
-new enemy(-200,150),
-new enemy(-300,225)
+new Enemy(0,75),
+new Enemy(-200,150),
+new Enemy(-300,225)
 ];
 var player = new Player();
 
@@ -104,8 +104,6 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 
-    console.log("enemy x coordinate:", enemy.x);
-    console.log("player x coordinate:", player.x);
     console.log("allEnemies: ", allEnemies);
 
     console.log("allEnemies first item: ", allEnemies[0]);
@@ -113,5 +111,17 @@ document.addEventListener('keyup', function(e) {
     allEnemies.forEach(function(enemy) {
         console.log("enemy: ", enemy);
     });
+    console.log("Enemy: ", Enemy );
+    console.log("enemy x coordinate:", enemy.x);
+    console.log("player x coordinate:", player.x);
 
-});
+    allEnemies;
+
+    allEnemies[0];
+
+    table(allEnemies);
+
+    player;
+    });
+
+
