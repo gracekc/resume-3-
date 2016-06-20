@@ -68,7 +68,6 @@ Player.prototype.handleInput = function(keyCode) {
     }
 };
 
-var enemy = new Enemy(0,75);
 
 var allEnemies = [
 new Enemy(0,75),
@@ -83,13 +82,28 @@ var playerSize = {width: 20, height: 30};
 
 function checkCollisions() {
 
-    if (enemy.x < player.x + playerSize.width &&
-     enemy.x + enemySize.width > player.x &&
-     enemy.y < player.y + playerSize.height &&
-     enemySize.height + enemy.y > player.y) {
+    if (allEnemies[0].x < player.x + playerSize.width &&
+     allEnemies[0].x + enemySize.width > player.x &&
+     allEnemies[0].y < player.y + playerSize.height &&
+     enemySize.height + allEnemies[0].y > player.y) {
         this.y = 0;
         this.x = 0;
     }
+      if (allEnemies[1].x < player.x + playerSize.width &&
+     allEnemies[1].x + enemySize.width > player.x &&
+     allEnemies[1].y < player.y + playerSize.height &&
+     enemySize.height + allEnemies[1].y > player.y) {
+        this.y = 0;
+        this.x = 0;
+    }
+      if (allEnemies[2].x < player.x + playerSize.width &&
+     allEnemies[2].x + enemySize.width > player.x &&
+     allEnemies[2].y < player.y + playerSize.height &&
+     enemySize.height + allEnemies[2].y > player.y) {
+        this.y = 0;
+        this.x = 0;
+    }
+
 }
 
 checkCollisions();
@@ -112,8 +126,16 @@ document.addEventListener('keyup', function(e) {
         console.log("enemy: ", enemy);
     });
     console.log("Enemy: ", Enemy );
-    console.log("enemy x coordinate:", enemy.x);
+    console.log("enemy x coordinate:", allEnemies[0].x);
+    console.log("enemy x coordinate:", allEnemies[1].x);
+    console.log("enemy x coordinate:", allEnemies[2].x);
     console.log("player x coordinate:", player.x);
+    console.log("enemy width", enemySize.width);
+    console.log("enemy height", enemySize.height);
+    console.log("player width", playerSize.width);
+    console.log("player height", playerSize.height);
+
+
 
     allEnemies;
 
